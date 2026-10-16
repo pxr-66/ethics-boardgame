@@ -1,0 +1,231 @@
+% 芯途抉择：设计说明 + 游戏规则（两页）
+% 编译：xelatex design-and-rules.tex
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=13mm,top=11mm,bottom=10mm]{geometry}
+\usepackage{xeCJK}
+\setCJKmainfont{Microsoft YaHei}[BoldFont={Microsoft YaHei Bold}]
+\setCJKfamilyfont{kai}{KaiTi}
+\setmainfont{Microsoft YaHei}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{fontawesome5}
+\usepackage{tabularx}
+\usepackage{array}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\linespread{1.18}
+
+% 游戏同款配色
+\definecolor{ink}{HTML}{4A3426}
+\definecolor{ink2}{HTML}{8A6E5A}
+\definecolor{paper}{HTML}{FFFAF2}
+\definecolor{cream}{HTML}{F6EAD8}
+\definecolor{pri}{HTML}{EF8A5B}
+\definecolor{prid}{HTML}{C9643A}
+\definecolor{sky}{HTML}{4FA9C4}
+\definecolor{lav}{HTML}{9A7BD0}
+\definecolor{sun}{HTML}{E0A23A}
+\definecolor{rose}{HTML}{D9708F}
+\definecolor{mint}{HTML}{5DAA6A}
+\definecolor{bad}{HTML}{D9625E}
+\color{ink}
+
+% 页面背景：奶油色
+\usepackage{eso-pic}
+\AddToShipoutPictureBG{\color{cream}\rule{\paperwidth}{\paperheight}}
+
+% 卡片盒子
+\newtcolorbox{card}[2][]{enhanced,colback=paper,colframe=#2!55!white,boxrule=0.9pt,arc=4mm,
+  left=3mm,right=3mm,top=2mm,bottom=2mm,fonttitle=\bfseries\color{white},
+  coltitle=white,colbacktitle=#2,attach boxed title to top left={xshift=3mm,yshift=-2mm},
+  boxed title style={arc=2.5mm,boxrule=0pt},title={#1},before skip=2.5mm,after skip=1mm}
+\newtcolorbox{note}[1]{enhanced,colback=#1!10!paper,colframe=#1!10!paper,boxrule=0pt,arc=3mm,
+  left=2.5mm,right=2.5mm,top=1.2mm,bottom=1.2mm,before skip=1.5mm,after skip=1mm}
+\newcommand{\kai}[1]{{\CJKfamily{kai}#1}}
+\newcommand{\lens}[2]{\tikz[baseline=(t.base)]\node[fill=#1,text=white,rounded corners=2.2pt,inner sep=1.6pt,inner xsep=3pt,font=\footnotesize\bfseries](t){#2};}
+\newcommand{\res}[2]{{\color{#1}\textbf{#2}}}
+\setlist{nosep,leftmargin=1.2em,itemsep=1.2pt}
+
+\begin{document}
+%=================================================================== 第 1 页
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north east,inner sep=0] at ([xshift=-12mm,yshift=-9mm]current page.north east){\includegraphics[width=20mm]{img/mascot.png}};
+\end{tikzpicture}
+\parbox{\dimexpr\linewidth-26mm}{{\fontsize{24}{28}\selectfont\bfseries\color{pri} 为什么这样设计}\\[1mm]
+{\color{ink2}\small 《芯途抉择》设计说明 \quad·\quad 一款关于成长与选择的工程师桌游\\
+小组成员：蒙浩煦、文俊杰、林龙鑫、罗家宇、杨帆、罗富元}}
+
+\begin{note}{pri}
+\small\textbf{一句话核心循环：}玩家通过\textbf{掷骰前进}获取\textbf{技术与资金}，用以\textbf{攻关项目、成长为资深工程师}，同时应对\textbf{真实行业事件与伦理困境}，最终以\textbf{总分最高}成为 MVP。我们想让玩家亲身体会课上那句话：\kai{当工程思维走到「价值」与「边界」，工程伦理就已经在场。}
+\end{note}
+
+\begin{multicols}{2}
+\begin{card}[\faIcon{balance-scale}\enspace 1. 两难卡：没有标准答案]{rose}
+\small 课程要求困境卡「真的两难」。我们 12 张困境卡里，\textbf{每个选项都有代价}：走捷径短期收益高（\res{mint}{+3 资金}），但会留下\res{bad}{隐患}；坚守底线要付出成本（\res{bad}{−1 资金}），换来声誉。题材全部来自第 2 周地图上标注的「双刃剑」点位：赶工期 vs 安全测试、数据授权、供应商利益输送、成果署名、双碳指标 vs 成本……
+
+\textbf{取舍理由比答案更重要}，所以每张卡结算后都有一道「想一想」，并可一键打开聊天说理由。
+\end{card}
+
+\begin{card}[\faIcon{layer-group}\enspace 2. 工程思维透镜：把阅读材料放进卡里]{sky}
+\small 每张困境卡都标注它对应《工程思维的特点》中的哪一种思维与维度，并列出\textbf{牵动谁}（利益相关方）：
+\begin{itemize}
+\item \lens{sky}{系统思维} 技术之外还牵动什么？如「废液处理」牵动社区与生态
+\item \lens{lav}{辩证思维} 哪里是双刃剑？如「发现隐藏缺陷」中公众安全 vs 组织利益
+\item \lens{sun}{价值思维} 价值如何流动？如「供应商的心意」触碰运营制度
+\end{itemize}
+玩家在做选择时，自然就在用课上的框架分析问题。
+\end{card}
+
+\begin{card}[\faIcon{heart}\enspace 3. 行业信任：个人选择，集体后果]{pri}
+\small 所有玩家\textbf{共享}一条「行业信任」。任何人走捷径，信任 −2；坚守 +1。降到 0 会爆发\textbf{信任危机}，所有人一起受罚；结束时信任够高，所有人都有口碑红利。
+
+这对应现实：一家企业的造假丑闻，会让公众怀疑整个行业。\kai{一个人的捷径，代价却由所有人承担}，这正是工程伦理中个人利益与公共利益的张力。玩家也因此会互相劝阻、讨论，形成真实的伦理对话。
+\end{card}
+
+\begin{card}[\faIcon{redo}\enspace 4. 选择的回响：后果会迟到]{lav}
+\small 现实中伦理决策的后果往往\textbf{延迟出现}。困境卡里的选择会在\textbf{两轮后}以「回响卡」回来：坚守测试的芯片零故障、客户追加订单；先发货的芯片被要求返修。
+
+回响是\textbf{概率性}的：走捷径不一定被发现，坚守也不一定立刻被看见。这避免了「好人一定有好报」的说教，更贴近真实。
+\end{card}
+
+\begin{card}[\faIcon{newspaper}\enspace 5. 让学习回归真实]{sun}
+\small 12 张行业事件卡全部\textbf{改编自真实事件并注明出处}：芯片出口管制、光刻机限制、「双碳」目标、2021 年汽车缺芯潮、AI 算力需求爆发、国家集成电路产业投资基金、RISC-V 推广……
+
+6 个角色来自第 2 周岗位画像：芯片设计、工艺、设备、封装测试、AI 算法、质量安全工程师，起始资源和专属技能各不相同。
+\end{card}
+
+\begin{card}[\faIcon{comments}\enspace 6. 复盘：游戏结束才是讨论的开始]{mint}
+\small 结算页不只显示 MVP，还会：
+\begin{itemize}
+\item 根据选择给出\textbf{工程师类型}：守护者 / 务实派 / 冒险家，并按三种思维统计「守住底线」的次数
+\item 展示\textbf{同一张卡大家各选了什么}，方便请两边各说理由
+\item 回顾自己的每个抉择，并给出 \textbf{4F 复盘}题（感受 / 事实 / 发现 / 未来）
+\end{itemize}
+\end{card}
+\end{multicols}
+
+\vspace{-1mm}
+\begin{center}
+\newcommand{\shot}[2]{\begin{tikzpicture}\node[inner sep=0,rounded corners=3mm](s){\includegraphics[height=56mm]{#1}};
+  \draw[white,line width=1.4pt,rounded corners=3mm](s.south west)rectangle(s.north east);
+  \node[below=1mm of s,font=\footnotesize\color{ink2}]{#2};\end{tikzpicture}}
+\shot{img/shot-dilemma.png}{困境卡：透镜 · 牵动谁 · 猜一猜 · 信任变化}\hfill
+\shot{img/shot-echo.png}{两轮后的「回响」}\hfill
+\shot{img/shot-end.png}{结算：你是哪种工程师}
+\end{center}
+\vspace{-2mm}
+\begin{note}{sky}
+\small\textbf{\faIcon{smile}\enspace 为什么不做难：}面向的是第一次接触工程伦理的普通同学。规则只有「掷骰子—看格子—做选择」三步；首次进入有 12 步交互教程（起名、试掷、试做一张困境卡、算分小测验）；游戏中吉祥物「小芯」在每种情况第一次出现时提示怎么做。一局 15--25 分钟，满足「一局 $\le$ 40 分钟」的要求。电脑、手机都能玩，扫码即可联机，3--6 人，人数不够可加机器人。
+\end{note}
+
+\newpage
+%=================================================================== 第 2 页
+\linespread{1.32}\selectfont
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north east,inner sep=0] at ([xshift=-12mm,yshift=-9mm]current page.north east){\includegraphics[width=20mm]{img/mascot.png}};
+\end{tikzpicture}
+\parbox{\dimexpr\linewidth-26mm}{{\fontsize{24}{28}\selectfont\bfseries\color{pri} 游戏规则介绍}\\[1mm]
+{\color{ink2}\small 3--6 人 \quad·\quad 约 20 分钟 \quad·\quad 浏览器打开网址即可游玩，手机、电脑都行\\
+「陌生人朗读测试」版：不需要讲解，读完这一页就能上手}}
+
+\begin{note}{pri}
+\small\textbf{\faIcon{bullseye}\enspace 目标：}你是一名刚入职的半导体工程师。沿着\textbf{芯片设计 → 晶圆制造 → 封装测试 → 终端应用}的产业链棋盘一圈圈前进，游戏固定轮数后，\textbf{总分最高}的人成为 MVP。
+\end{note}
+
+\begin{card}[\faIcon{play-circle}\enspace 开始游戏]{sky}
+\small
+\begin{tabularx}{\linewidth}{@{}>{\bfseries\color{sky}}l X@{}}
+1. 建房间 & 一人点「创建房间」，得到 4 位房间码和二维码。\\
+2. 加入 & 其他人点「加入房间」输入房间码，或用手机扫码。3--6 人，不够可以「添加机器人」。\\
+3. 选角色 & 每人选一个角色（不选则随机），房主点「开始游戏」。
+\end{tabularx}
+\end{card}
+
+\begin{card}[\faIcon{dice}\enspace 你的回合：三步]{pri}
+\small
+\textbf{\color{pri}① 掷骰子}：点「掷骰子」，棋子自动前进 1--6 格。经过起点「入职报到」领工资 +2 资金。\\
+\textbf{\color{pri}② 看格子}：停在哪一格，就触发哪一格的效果（见下表）。\\
+\textbf{\color{pri}③ 结束回合}：处理完卡牌，点「结束回合」，轮到下一位。
+\end{card}
+
+\begin{multicols}{2}
+\begin{card}[\faIcon{th}\enspace 格子说明]{sun}
+\footnotesize
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}l X@{}}
+项目 & 花 3 技术攻关，得 \textbf{1 项目 + 2 资金}；技术不够可接外包 +1 资金\\
+学习 & 自学 +2 技术；或花 2 资金培训 +4 技术\\
+伦理困境 & 两难抉择，选 A 或 B，\textbf{没有标准答案}\\
+行业事件 & 改编自真实新闻，按卡面结算\\
+机遇 & 好运卡，例如专利授权、获得投资\\
+安全审计 & 有隐患则被罚款；没隐患且声誉高获表彰\\
+导师指导 & +1 技术、+1 声誉\\
+行业峰会 & +1 资金、+1 声誉\\
+入职报到 & 停下或经过，领工资 +2 资金
+\end{tabularx}
+\end{card}
+
+\begin{card}[\faIcon{calculator}\enspace 计分]{mint}
+\small
+\begin{center}
+\textbf{总分 = 资金 + 技术 + 声誉×2 + 项目×5 − 隐患×3}
+\end{center}
+\footnotesize 小窍门：先在学习格攒技术，再到项目格攻关，项目最值钱。
+\end{card}
+
+\begin{card}[\faIcon{balance-scale}\enspace 伦理困境（重点）]{rose}
+\small
+\begin{itemize}
+\item 两个选项都有代价。带\textbf{\color{bad}隐患}的选项短期收益高，但每个隐患结算时 \textbf{−3 分}，还可能在安全审计或「质量暴雷」事件中被罚。
+\item \textbf{猜一猜}：别人遇到困境时，你可以猜 TA 会选什么，猜中 +1 资金。
+\item \textbf{回响}：你的选择两轮后可能回来找你，带来奖励或惩罚。
+\end{itemize}
+\end{card}
+
+\begin{card}[\faIcon{heart}\enspace 行业信任（大家共享）]{pri}
+\small
+\begin{itemize}
+\item 从 6 开始。任何人在困境里\textbf{走捷径 −2}，有捷径却\textbf{坚守 +1}。
+\item 降到 \textbf{0}：信任危机，所有人 −2 资金，有隐患的人再 −2 声誉。
+\item 结束时 \textbf{$\ge$ 6}：所有人获得口碑红利 +3 资金。
+\end{itemize}
+\end{card}
+\end{multicols}
+
+\vspace{-1mm}
+\begin{card}[\faIcon{route}\enspace 一个回合长什么样]{sky}
+\small
+\begin{tikzpicture}[x=1mm,y=1mm,
+  st/.style={rounded corners=2.5mm,fill=#1!14!white,draw=#1!60!white,line width=.7pt,minimum height=17mm,text width=31mm,align=center,font=\footnotesize},
+  ar/.style={-{Stealth[length=2.2mm]},line width=1pt,color=ink2!70}]
+\node[st=pri](a) at (0,0){\textbf{\color{pri}掷骰子}\\[.5mm]掷出 4，从「入职报到」\\走到「EDA 培训」};
+\node[st=mint,right=5mm of a](b){\textbf{\color{mint}学习格}\\[.5mm]选「报名培训」\\−2 资金，+4 技术};
+\node[st=rose,right=5mm of b](c){\textbf{\color{rose}下一回合：困境}\\[.5mm]「赶工期 vs 安全测试」\\选 B 坚持测试，信任 +1};
+\node[st=lav,right=5mm of c](d){\textbf{\color{lav}两轮后：回响}\\[.5mm]测过的芯片零故障\\客户追加订单 +2 资金};
+\draw[ar](a)--(b);\draw[ar](b)--(c);\draw[ar](c)--(d);
+\end{tikzpicture}
+\end{card}
+
+\begin{card}[\faIcon{user-friends}\enspace 六个角色]{lav}
+\footnotesize
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}l X >{\bfseries}l X@{}}
+芯片设计工程师 & 学习格额外 +1 技术 & 封装测试工程师 & 行业事件的每项损失减 1\\
+工艺工程师 & 攻关项目只需 2 技术 & AI 算法工程师 & 机遇、峰会额外 +1 技术\\
+设备工程师 & 经过起点工资额外 +1 & 质量安全工程师 & 困境中获得声誉时额外 +1
+\end{tabularx}
+\end{card}
+
+\begin{note}{mint}
+\small\textbf{\faIcon{flag-checkered}\enspace 游戏结束：}标准局 3--4 人 8 轮、5--6 人 6 轮；快速局 5 轮。结算页显示 MVP、排名、特别奖、你是哪种工程师，以及大家在每张困境卡上的选择。\textbf{别急着关掉}：挑一张大家选法不同的卡，请两边说说理由，这才是这个游戏最有意思的部分。
+\end{note}
+
+\begin{note}{sun}
+\small\textbf{\faIcon{lightbulb}\enspace 新手小贴士：}第一次玩点「新手教程」，吉祥物小芯会一步步带你；游戏中右上角「菜单」可随时看规则；「聊天」按钮在右上角，困境卡结算后也可以一键「聊聊我的理由」；点击棋盘上任意格子，可以查看它的作用。
+\end{note}
+\end{document}
