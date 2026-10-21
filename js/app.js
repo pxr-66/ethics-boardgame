@@ -423,6 +423,36 @@ ${inviteURL()}`);
   $('#btnMenu').onclick = () => { FX.sfx.click(); menuCard(); };
   $('#modal').onclick = e => { if (e.target.id === 'modal' && !$('#game').classList.contains('active')) closeModal(); };
 
+  // ---------- 第二版：更新说明、纸牌版下载 ----------
+  const NEWS_VER = 'v2';
+  function newsCard() {
+    modal(card('#ef8a5b', 'sparkles', '第二版更新啦', '2026 年 10 月 · 芯途抉择 v2', `<div class="help-list news-list">
+      <div>${I('star')}<span><b>新增评分与评论</b>：主页点「评分评论」，给游戏打 1–5 星、写下感受。所有人都能看到大家的评分和每条评论，还能看到是多久前发的。</span></div>
+      <div>${I('scroll-text')}<span><b>新增纸牌版</b>：没有手机也能玩！主页点「纸牌版」下载规则书和打印素材，A4 打印、剪一剪就能开局。</span></div>
+      <div>${I('users')}<span><b>纸牌版专为青少年简化</b>：隐患卡面朝下盲抽、猜猜卡同时翻开、选完要说一句理由，还能自己写困境卡。</span></div>
+      <div>${I('trophy')}<span>结算页新增「给游戏打分」按钮，玩完顺手留个评价。</span></div>
+      <label class="news-skip"><input type="checkbox" id="nwSkip"> 这个版本不再自动弹出</label>
+      <button class="btn pri" id="nwRate">${I('star')}去评分</button>
+      <button class="btn" id="nwOk">知道了</button></div>`));
+    const done = () => { if ($('#nwSkip').checked) localStorage.setItem('ecg_news', NEWS_VER); closeModal(); };
+    $('#nwOk').onclick = done;
+    $('#nwRate').onclick = () => { done(); Reviews.open(); };
+  }
+  function paperCard() {
+    const f = (file, icon, t, d) => `<a class="btn paper-dl" href="docs/paper/${file}" target="_blank" rel="noopener">${I(icon)}<span><b>${t}</b><small>${d}</small></span></a>`;
+    modal(card('#74bf7e', 'scroll-text', '纸牌版', '打印出来，围坐一桌也能玩', `<div class="help-list">
+      <div>${I('users')}<span>2–6 人 · 10 岁以上 · 约 30 分钟。和线上版同一套角色、棋盘和卡牌，规则更简单。</span></div>
+      ${f('rules.pdf', 'book-open', '规则书', 'A4 · 6 页，先读这个')}
+      ${f('print-kit.pdf', 'scroll-text', '打印素材', 'A4 · 23 页：棋盘、角色卡、63 张卡牌、代币、棋子、计分表')}
+      ${f('board-a3.pdf', 'flag', '整张棋盘（可选）', 'A3 · 1 页，打印店打一张就不用拼')}
+      <div>${I('info')}<span>打印时选「实际大小 / 100%」，不要选「适合页面」。第 1 页有详细的打印和裁剪步骤。</span></div>
+      <button class="btn" onclick="App.closeModal()">关闭</button></div>`));
+  }
+  $('#btnNews').onclick = () => { FX.sfx.click(); newsCard(); };
+  $('#btnPaper').onclick = () => { FX.sfx.click(); paperCard(); };
+  $('#btnReviews').onclick = () => { FX.sfx.click(); Reviews.open(); };
+  $('#btnEndRate').onclick = () => { FX.sfx.click(); Reviews.open(); };
+
   // ---------- 启动 ----------
   renderMe(); renderContinue();
   const qRoom = new URLSearchParams(location.search).get('room');
@@ -432,7 +462,12 @@ ${inviteURL()}`);
     st ? createRoom(st) : joinRoom(qRoom);
   });
   // 等 3D 场景（ES 模块）加载完再去掉加载页；WebGL 不可用时也不卡住
-  const hideLoader = () => $('#loader').classList.add('done');
+  // 加载页消失后，一进主页就弹出更新说明（扫码进房间时不打扰）
+  const hideLoader = () => {
+    if ($('#loader').classList.contains('done')) return;
+    $('#loader').classList.add('done');
+    if (!qRoom && localStorage.getItem('ecg_news') !== NEWS_VER) setTimeout(() => { if ($('#home').classList.contains('active') && !$('#modal').classList.contains('show')) newsCard(); }, 500);
+  };
   const boot = async () => {
     try { await document.fonts.load('40px "ZCOOL QingKe HuangYou"', '芯途抉择'); await Board3D.init($('#scene3d')); Game.on3DReady(); }
     catch (e) { console.warn('3D 初始化失败', e); }
@@ -440,5 +475,5 @@ ${inviteURL()}`);
   };
   if (window.Board3D) boot(); else addEventListener('board3d-ready', boot, { once: true });
   setTimeout(hideLoader, 6000);
-  return { me, saveMe, show, toast, modal, closeModal, sendChat, get state() { return S; } };
+  return { me, saveMe, show, toast, modal, closeModal, sendChat, card, get state() { return S; } };
 })();

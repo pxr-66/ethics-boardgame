@@ -565,3 +565,74 @@ body.page-end .chat-fab { display: none !important; }
 body.page-end .chat-pops { bottom: calc(20px + var(--safe-b)); }
 .et-head small { display: flex; align-items: center; gap: 4px; }
 .end-btns .btn { min-width: 0; }
+
+/* ===== 第二版：评分评论、更新说明、纸牌版 ===== */
+button.hero-tag { font: inherit; font-size: 12px; cursor: pointer; }
+button.hero-tag b { color: var(--pri-d); }
+.rv-btn { flex-direction: column; gap: 0; line-height: 1.25; padding-top: 6px; padding-bottom: 6px; }
+.rv-btn > .ic { display: none; }
+.rv-btn span { display: inline-flex; align-items: center; gap: 6px; }
+.rv-btn small { font-size: 11px; font-weight: 400; color: var(--ink2); font-family: var(--fn); }
+.rv-btn span::before { content: '★'; color: var(--sun); font-size: 17px; }
+#reviews.active { display: block; padding: 16px 14px calc(28px + var(--safe-b)); }
+.rv-wrap { width: min(640px, 100%); margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+.rv-top { display: flex; align-items: center; gap: 12px; }
+.rv-top h2 { font-family: var(--fz); font-weight: 400; font-size: 26px; flex: 1; }
+.rv-top .net-status { font-size: 11px; }
+.rv-sum { padding: 16px 18px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.rv-avg { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 130px; }
+.rv-avg b { font-family: var(--fn); font-size: 52px; line-height: 1; color: var(--pri-d); }
+.rv-avg span { font-size: 12px; color: var(--ink2); }
+.rv-dist { flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 5px; }
+.rv-dist div { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink2); }
+.rv-dist span { width: 30px; } .rv-dist small { width: 24px; text-align: right; font-family: var(--fn); }
+.rv-dist i { flex: 1; height: 10px; border-radius: 10px; background: var(--line); overflow: hidden; }
+.rv-dist em { display: block; height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--sun), var(--pri)); }
+.stars { display: inline-flex; gap: 1px; vertical-align: -.15em; }
+.stars i { display: inline-flex; color: var(--line2); }
+.stars .ic { width: 15px; height: 15px; fill: currentColor; stroke-width: 1.5; }
+.stars i.on { color: var(--sun); }
+.stars i.half { color: var(--sun); opacity: .5; }
+.stars.lg .ic { width: 22px; height: 22px; }
+.rv-form { padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.rv-form h3 { font-family: var(--fz); font-weight: 400; font-size: 19px; display: flex; align-items: center; gap: 6px; }
+.rv-form h3 .ic { color: var(--pri); }
+.rv-pick { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.rv-pick button { border: none; background: none; padding: 2px; color: var(--line2); transition: transform .15s; }
+.rv-pick button .ic { width: 34px; height: 34px; fill: currentColor; stroke-width: 1.4; }
+.rv-pick button.on { color: var(--sun); }
+.rv-pick button:active { transform: scale(.9); }
+.rv-pick span { margin-left: 8px; font-size: 14px; color: var(--ink2); font-weight: 700; }
+.rv-who { display: flex; align-items: center; gap: 10px; }
+.rv-who input, .rv-form textarea { flex: 1; width: 100%; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--line2); background: #fff; font-size: 15px; outline: none; font-family: inherit; color: var(--ink); -webkit-user-select: text; user-select: text; resize: vertical; }
+.rv-who input:focus, .rv-form textarea:focus { border-color: var(--pri); box-shadow: 0 0 0 4px rgba(239, 138, 91, .18); }
+.rv-send { display: flex; align-items: center; justify-content: space-between; }
+.rv-send small { color: var(--ink3); font-family: var(--fn); }
+.rv-list { display: flex; flex-direction: column; gap: 10px; }
+.rv-item { padding: 12px 14px; display: flex; gap: 12px; align-items: flex-start; }
+.rv-body { flex: 1; min-width: 0; }
+.rv-h { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.rv-h b { font-size: 15px; }
+.rv-h time { margin-left: auto; font-size: 12px; color: var(--ink3); white-space: nowrap; }
+.rv-body p { margin-top: 4px; line-height: 1.7; font-size: 14.5px; color: var(--ink); word-break: break-word; -webkit-user-select: text; user-select: text; }
+.rv-body p.muted { color: var(--ink3); font-size: 13px; }
+.rv-del { margin-top: 6px; border: none; background: none; color: var(--ink3); font-size: 12px; display: inline-flex; align-items: center; gap: 2px; }
+.rv-empty { padding: 26px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; color: var(--ink2); line-height: 1.7; }
+#rvMore { align-self: center; }
+.news-list b { color: var(--pri-d); }
+.news-skip { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink2); justify-content: center; cursor: pointer; }
+.news-skip input { width: 16px; height: 16px; accent-color: var(--pri); }
+.paper-dl { justify-content: flex-start; text-align: left; text-decoration: none; }
+.paper-dl > .ic { color: var(--mint); width: 26px; height: 26px; }
+.paper-dl span { display: flex; flex-direction: column; }
+.paper-dl small { font-weight: 400; font-size: 12px; color: var(--ink2); }
+.rv-top { flex-wrap: wrap; }
+.rv-top h2 { white-space: nowrap; }
+.rv-top .btn { white-space: nowrap; }
+@media (max-width: 480px) {
+  .rv-top .net-status { flex-basis: 100%; margin-top: 0; }
+  .rv-pick button .ic { width: 30px; height: 30px; }
+  .rv-pick span { flex-basis: 100%; margin: 2px 0 0 4px; }
+  .rv-sum { gap: 12px; }
+  .rv-avg { flex-basis: 100%; }
+}

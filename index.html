@@ -10,8 +10,8 @@
 <meta name="description" content="职业道德与工程伦理课程桌游：扮演半导体工程师，沿产业链成长，在伦理困境中做出抉择。支持 3-6 人联机，手机就能玩。">
 <link rel="icon" href="img/mascot.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/mascot.svg">
-<link rel="stylesheet" href="fonts/fonts.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="fonts/fonts.css?v=2.02">
+<link rel="stylesheet" href="css/style.css?v=2.02">
 </head>
 <body class="mode-menu">
 <canvas id="scene3d" aria-label="3D 棋盘"></canvas>
@@ -21,7 +21,7 @@
 <!-- 主页 -->
 <section id="home" class="screen active">
   <div class="hero">
-    <div class="hero-tag">职业道德与工程伦理 · 课程桌游</div>
+    <button class="hero-tag" id="btnNews" aria-label="查看第二版更新说明">职业道德与工程伦理 · 课程桌游 · <b>第二版</b></button>
     <img src="img/mascot.svg" alt="" class="hero-m">
     <h1 class="logo">芯途抉择</h1>
     <p class="hero-sub">做一名半导体新人工程师，沿着芯片产业链慢慢成长。<br>遇到<em>没有标准答案</em>的选择时，你会怎么做？</p>
@@ -33,6 +33,10 @@
       <div class="btn-row">
         <button class="btn" id="btnTutorial" data-i="book-open">新手教程</button>
         <button class="btn" id="btnSolo" data-i="bot">单机试玩</button>
+      </div>
+      <div class="btn-row">
+        <button class="btn rv-btn" id="btnReviews"><span>评分评论</span></button>
+        <button class="btn" id="btnPaper" data-i="scroll-text">纸牌版</button>
       </div>
     </div>
   </div>
@@ -116,6 +120,20 @@
   <div class="coach" id="coach"><img src="img/mascot.svg" alt="" class="coach-m"><div class="coach-txt" id="coachTxt"></div></div>
 </section>
 
+<!-- 评分与评论（第二版） -->
+<section id="reviews" class="screen">
+  <div class="rv-wrap">
+    <div class="rv-top">
+      <button class="btn sm" id="rvBack" data-i="chevron-left">主页</button>
+      <h2>评分与评论</h2>
+      <span class="net-status" id="rvNet">正在连接评论服务器…</span>
+    </div>
+    <div class="card-lite rv-sum" id="rvSum"></div>
+    <div class="card-lite rv-form" id="rvForm"></div>
+    <div class="rv-list" id="rvList"></div>
+  </div>
+</section>
+
 <!-- 结算 -->
 <section id="end" class="screen">
   <canvas id="confetti"></canvas>
@@ -139,6 +157,7 @@
     <div class="end-btns">
       <button class="btn xl pri host-only" id="btnAgain" data-i="refresh-cw">再来一局</button>
       <button class="btn xl sec" id="btnEndChat" data-i="message-circle">一起聊聊</button>
+      <button class="btn xl" id="btnEndRate" data-i="star">给游戏打分</button>
       <button class="btn xl" id="btnHome" data-i="house">回到主页</button>
     </div>
   </div>
@@ -149,22 +168,23 @@
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 <div class="toast" id="toast"></div>
 
-<script src="js/icons-data.js"></script>
-<script src="js/data-board.js"></script>
-<script src="js/avatars-data.js"></script>
-<script src="js/icons.js"></script>
-<script src="js/data-dilemma.js"></script>
-<script src="js/data-event.js"></script>
-<script src="js/engine.js"></script>
-<script src="js/mqtt-lite.js"></script>
-<script src="js/net.js"></script>
-<script src="lib/qrcode.js"></script>
-<script src="js/fx.js"></script>
-<script src="js/tutorial.js"></script>
-<script src="js/ui-game.js"></script>
-<script src="js/chat.js"></script>
-<script src="js/app.js"></script>
+<script src="js/icons-data.js?v=2.02"></script>
+<script src="js/data-board.js?v=2.02"></script>
+<script src="js/avatars-data.js?v=2.02"></script>
+<script src="js/icons.js?v=2.02"></script>
+<script src="js/data-dilemma.js?v=2.02"></script>
+<script src="js/data-event.js?v=2.02"></script>
+<script src="js/engine.js?v=2.02"></script>
+<script src="js/mqtt-lite.js?v=2.02"></script>
+<script src="js/net.js?v=2.02"></script>
+<script src="lib/qrcode.js?v=2.02"></script>
+<script src="js/fx.js?v=2.02"></script>
+<script src="js/tutorial.js?v=2.02"></script>
+<script src="js/ui-game.js?v=2.02"></script>
+<script src="js/chat.js?v=2.02"></script>
+<script src="js/app.js?v=2.02"></script>
+<script src="js/reviews.js?v=2.02"></script>
 <!-- 3D 棋盘：由 js/board3d.js 打包而来（见 tools/build-3d.sh），普通脚本方便直接双击打开 -->
-<script src="js/board3d.bundle.js"></script>
+<script src="js/board3d.bundle.js?v=2.02"></script>
 </body>
 </html>
