@@ -636,3 +636,11 @@ button.hero-tag b { color: var(--pri-d); }
   .rv-sum { gap: 12px; }
   .rv-avg { flex-basis: 100%; }
 }
+/* QQ / 微信内置浏览器的提示 */
+.inapp-bar { width: min(560px, 100%); display: flex; align-items: center; gap: 8px; padding: 9px 10px 9px 14px; border-radius: 16px; background: #fff6dd; border: 2px solid #f2d48a; color: #8a6420; font-size: 13px; line-height: 1.5; box-shadow: var(--shadow); }
+.inapp-bar > .ic { color: var(--sun); flex: none; }
+.inapp-bar span { flex: 1; }
+.inapp-bar button { flex: none; border: none; background: none; color: #b8801c; width: 32px; height: 32px; display: grid; place-items: center; }
+.inapp-tip { padding: 10px 12px; border-radius: 14px; background: #fff6dd; color: #8a6420; font-size: 13.5px; }
+.inapp-tip > .ic { color: var(--sun) !important; }
+.dl-link { display: block !important; padding: 10px 12px; border-radius: 12px; background: var(--paper2); border: 2px dashed var(--line2); font-family: var(--fn); font-size: 13px; word-break: break-all; color: var(--ink2); -webkit-user-select: all; user-select: all; }

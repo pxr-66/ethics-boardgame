@@ -438,15 +438,42 @@ ${inviteURL()}`);
     $('#nwOk').onclick = done;
     $('#nwRate').onclick = () => { done(); Reviews.open(); };
   }
+  // QQ、微信等 App 里的内置浏览器打不开 PDF，点下载会调起 App 自己的下载器，经常下载失败
+  const inApp = /MicroMessenger|\bQQ\/|\bTIM\/|DingTalk|Weibo/i.test(navigator.userAgent);
+  const appName = /MicroMessenger/i.test(navigator.userAgent) ? '微信' : /DingTalk/i.test(navigator.userAgent) ? '钉钉' : /Weibo/i.test(navigator.userAgent) ? '微博' : 'QQ';
+  const openTip = `点右上角的「···」，选择「在浏览器打开」`;
   function paperCard() {
-    const f = (file, icon, t, d) => `<a class="btn paper-dl" href="docs/paper/${file}" target="_blank" rel="noopener">${I(icon)}<span><b>${t}</b><small>${d}</small></span></a>`;
+    const f = (file, icon, t, d) => inApp
+      ? `<button class="btn paper-dl" data-f="${file}">${I(icon)}<span><b>${t}</b><small>${d}</small></span></button>`
+      : `<a class="btn paper-dl" href="docs/paper/${file}" target="_blank" rel="noopener">${I(icon)}<span><b>${t}</b><small>${d}</small></span></a>`;
     modal(card('#74bf7e', 'scroll-text', '纸牌版', '打印出来，围坐一桌也能玩', `<div class="help-list">
+      ${inApp ? `<div class="inapp-tip">${I('info')}<span>${appName}里没法直接下载 PDF。请${openTip}，再点「纸牌版」下载。</span></div>` : ''}
       <div>${I('users')}<span>2–6 人 · 10 岁以上 · 约 30 分钟。和线上版同一套角色、棋盘和卡牌，规则更简单。</span></div>
       ${f('rules.pdf', 'book-open', '规则书', 'A4 · 6 页，先读这个')}
       ${f('print-kit.pdf', 'scroll-text', '打印素材', 'A4 · 23 页：棋盘、角色卡、63 张卡牌、代币、棋子、计分表')}
       ${f('board-a3.pdf', 'flag', '整张棋盘（可选）', 'A3 · 1 页，打印店打一张就不用拼')}
       <div>${I('info')}<span>打印时选「实际大小 / 100%」，不要选「适合页面」。第 1 页有详细的打印和裁剪步骤。</span></div>
       <button class="btn" onclick="App.closeModal()">关闭</button></div>`));
+    // 在 App 里点文件：不触发会失败的下载，告诉同学怎么换到浏览器，或者复制链接
+    $('#modalBox').querySelectorAll('button.paper-dl').forEach(b => b.onclick = () => {
+      const url = new URL('docs/paper/' + b.dataset.f, location.href).href;
+      modal(card('#5bb5d6', 'link', '请在浏览器里下载', `${appName}里下载 PDF 会失败`, `<div class="help-list">
+        <div>${I('pointer')}<span><b>方法一：</b>${openTip}，再点「纸牌版」下载。</span></div>
+        <div>${I('copy')}<span><b>方法二：</b>复制下面的链接，粘贴到手机浏览器的地址栏里打开。</span></div>
+        <div class="dl-link">${esc(url)}</div>
+        <button class="btn pri" id="dlCopy">${I('copy')}复制链接</button>
+        <button class="btn" id="dlBack">${I('chevron-left')}返回</button></div>`));
+      $('#dlCopy').onclick = () => copy(url);
+      $('#dlBack').onclick = paperCard;
+    });
+  }
+  // 在 App 里打开时，主页顶部提示换到浏览器（下载和 3D 棋盘都更顺畅），可以关掉
+  if (inApp && !sessionStorage.getItem('ecg_inapp_off')) {
+    const bar = document.createElement('div');
+    bar.className = 'inapp-bar';
+    bar.innerHTML = `${I('info')}<span>在${appName}里打开的？${openTip}，下载和 3D 棋盘都更顺畅</span><button aria-label="关闭提示">${I('x')}</button>`;
+    bar.querySelector('button').onclick = () => { bar.remove(); sessionStorage.setItem('ecg_inapp_off', '1'); };
+    $('#home').prepend(bar);
   }
   $('#btnNews').onclick = () => { FX.sfx.click(); newsCard(); };
   $('#btnPaper').onclick = () => { FX.sfx.click(); paperCard(); };

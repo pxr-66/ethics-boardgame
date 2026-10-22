@@ -282,7 +282,7 @@ function kitCover(pageMap) {
       <div><span><b>折棋子：</b>剪下 6 个棋子，沿虚线折成三角形，底座粘好。</span></div>
       <div><span><b>分好类：</b>困境、事件、机遇、隐患四叠卡分别用夹子或小袋子装好，下次拿出来就能玩。</span></div>
     </div>
-    <p class="mini" style="margin-top:auto">文件由 tools/paper/build.mjs 自动生成。要改卡牌文字，改 js/data-*.js（和线上版共用）或 tools/paper/data.mjs（纸牌版专用），再运行 <b>node tools/paper/build.mjs</b> 重新生成。</p>
+    <div class="say" style="margin-top:auto">${mascot(14)}<div class="bub">做好以后，翻开《规则书》，就能开始第一局啦！</div></div>
   </div>`);
 }
 
